@@ -24,7 +24,7 @@
                 FontAttributes="Bold"
                 FontSize="20"
                 HorizontalTextAlignment="Center"
-                Text="Agregar Nuevo Video"
+                Text="Agregar Nuevo Sitio"
                 TextColor="Black"
                 VerticalOptions="Start" />
         </Frame>
@@ -214,7 +214,7 @@
                 HeightRequest="40"
                 HorizontalOptions="Center"
                 SemanticProperties.Hint="Agregar"
-                Text="Agregar Video"
+                Text="Agregar Sitio"
                 VerticalOptions="CenterAndExpand" />
         </Frame>
     </Grid>

@@ -14,12 +14,12 @@
             base.OnAppearing();
         }
 
-        private void btnAgregarFirma_Clicked(object sender, EventArgs e)
+        private void btnAgregarSitio_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Views.agregarVideo());
         }
 
-        private void btnVerFirmas_Clicked(object sender, EventArgs e)
+        private void btnVerSitio_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Views.verSitios());
         }

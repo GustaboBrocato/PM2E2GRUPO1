@@ -45,29 +45,29 @@
         <ScrollView Grid.Row="1">
             <StackLayout Padding="0,0,0,0" VerticalOptions="CenterAndExpand">
                 <Button
-                    x:Name="btnAgregarFirma"
+                    x:Name="btnAgregarSitio"
                     Margin="30,0,30,20"
                     BackgroundColor="Green"
-                    Clicked="btnAgregarFirma_Clicked"
+                    Clicked="btnAgregarSitio_Clicked"
                     CornerRadius="20"
                     FontSize="12"
                     HeightRequest="40"
                     HorizontalOptions="FillAndExpand"
                     SemanticProperties.Hint="Agregar Video"
-                    Text="Agregar Video"
+                    Text="Agregar Sitio"
                     VerticalOptions="Center" />
 
                 <Button
-                    x:Name="btnVerFirmas"
+                    x:Name="btnVerSitios"
                     Margin="30,0,30,20"
                     BackgroundColor="Green"
-                    Clicked="btnVerFirmas_Clicked"
+                    Clicked="btnVerSitio_Clicked"
                     CornerRadius="20"
                     FontSize="12"
                     HeightRequest="40"
                     HorizontalOptions="FillAndExpand"
                     SemanticProperties.Hint="Ver Videos"
-                    Text="Ver Videos"
+                    Text="Ver Sitios"
                     VerticalOptions="Center" />
             </StackLayout>
         </ScrollView>
