@@ -69,6 +69,21 @@
                     SemanticProperties.Hint="Ver Videos"
                     Text="Ver Sitios"
                     VerticalOptions="Center" />
+                <Frame
+                    Margin="10,50,10,10"
+                    Padding="0"
+                    BackgroundColor="{DynamicResource LightBlue70}"
+                    BorderColor="Black"
+                    CornerRadius="20">
+                    <Label
+                        x:Name="labelIntegrantes"
+                        Margin="10,10,10,10"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalTextAlignment="Center" />
+                </Frame>
+
             </StackLayout>
         </ScrollView>
 

@@ -7,6 +7,7 @@
         public MainPage()
         {
             InitializeComponent();
+            labelIntegrantes.Text = "Integrantes - Grupo #1\r\n\r\nAleks Xavier Pineda Macias \t  - 202110060173\r\nClaudia Verónica Rodríguez Paz    - 201910010134\r\nGustavo Ariel Brocato Medina \t  - 202010030250\r\nJensy Lorena Villafranca Navarro  - 202110120039\r\nJonathan Ignacio Marley Ramírez   - 201920060176\r\nKency Angely Rosa Paz \t\t  - 202110050072";
         }
 
         protected override async void OnAppearing()

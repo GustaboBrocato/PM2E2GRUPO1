@@ -62,8 +62,19 @@ public partial class verMapa : ContentPage
         Navigation.PopAsync();
     }
 
-    private void btnDirecciones_Clicked(object sender, EventArgs e)
+    private async void btnDirecciones_Clicked(object sender, EventArgs e)
     {
+        var result = await DisplayAlert("Abrir Mapas", "¿Desea abrir a aplicación de mapas para navegación?", "Si", "No");
 
+        if (result)
+        {
+            Location location = new Location(Latitud, Longitud);
+
+            var uri = new Uri($"https://www.google.com/maps/dir/?api=1&travelmode=driving&dir_action=navigate&destination={Latitud},{Longitud}");
+
+            await Launcher.TryOpenAsync(uri);
+        }
+
+        
     }
 }
