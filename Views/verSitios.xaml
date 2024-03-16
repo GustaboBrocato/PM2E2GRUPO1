@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PM2E2GRUPO1.Views.verSitios"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title=""
+    BackgroundImageSource="backgroundfirma.png">
+    <Grid>
+        <!--  Content Grid  -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  Header  -->
+        <Frame
+            Grid.Row="0"
+            Margin="10,10,10,10"
+            Padding="5,10,5,10"
+            BackgroundColor="{DynamicResource LightBlue70}"
+            BorderColor="Black"
+            CornerRadius="20">
+            <Label
+                Margin="0,0,0,0"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalTextAlignment="Center"
+                Text="Videos Agregados"
+                TextColor="Black"
+                VerticalOptions="Start" />
+        </Frame>
+
+
+        <ActivityIndicator
+            x:Name="activityIndicator"
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsLoading}"
+            IsVisible="{Binding IsLoading}"
+            VerticalOptions="Center"
+            Color="Green" />
+
+        <!--  Body - Collection view  -->
+        <ScrollView Grid.Row="1">
+            <CarouselView
+                x:Name="carouselView"
+                Margin="0,0,0,20"
+                ItemsSource="{Binding SitioItems}">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout
+                        ItemSpacing="0"
+                        Orientation="Horizontal"
+                        SnapPointsAlignment="Start"
+                        SnapPointsType="Mandatory" />
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            x:Name="frameCarousel"
+                            Margin="10,0,10,0"
+                            Padding="5"
+                            BackgroundColor="{DynamicResource LightBlue70}"
+                            BorderColor="Black"
+                            CornerRadius="10"
+                            HasShadow="True"
+                            HeightRequest="300">
+                            <StackLayout
+                                Margin="0,0,0,0"
+                                Padding="0,0,0,0"
+                                Orientation="Vertical">
+                                <Label
+                                    Margin="0,10,0,20"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding Descripcion}"
+                                    TextColor="Black" />
+                                <ImageButton
+                                    x:Name="btnVerMedia"
+                                    Margin="0,0,0,20"
+                                    Aspect="AspectFit"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding VerMediaTappedCommand}"
+                                    CommandParameter="{Binding .}"
+                                    HeightRequest="100"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="playvideo.png"
+                                    WidthRequest="100" />
+                                <Label
+                                    Margin="0,10,0,20"
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding Lugar}"
+                                    TextColor="Black" />
+                                <StackLayout
+                                    Margin="0,5,0,5"
+                                    Padding="0,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Orientation="Horizontal"
+                                    VerticalOptions="Start">
+                                    <ImageButton
+                                        x:Name="btnVerMapa"
+                                        Margin="0,0,10,0"
+                                        Aspect="AspectFit"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding VerMapaTappedCommand}"
+                                        CommandParameter="{Binding .}"
+                                        HeightRequest="35"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Source="mapa.png"
+                                        WidthRequest="35" />
+                                    <ImageButton
+                                        x:Name="btnEditar"
+                                        Margin="0,0,10,0"
+                                        Aspect="AspectFit"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding EditarTappedCommand}"
+                                        CommandParameter="{Binding .}"
+                                        HeightRequest="35"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Source="editar.png"
+                                        WidthRequest="35" />
+                                    <ImageButton
+                                        x:Name="btnEliminar"
+                                        Margin="0,0,0,0"
+                                        Aspect="AspectFit"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding EliminarTappedCommand}"
+                                        CommandParameter="{Binding .}"
+                                        HeightRequest="35"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Source="eliminar2.png"
+                                        WidthRequest="35" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </ScrollView>
+
+        <!--  Bottom Navigation Bar  -->
+        <Frame
+            Grid.Row="2"
+            Margin="10,10,10,10"
+            Padding="5,10,5,10"
+            BackgroundColor="{DynamicResource LightBlue70}"
+            BorderColor="Black"
+            CornerRadius="20">
+            <Button
+                x:Name="btnRegresar"
+                Margin="0,0,0,0"
+                BackgroundColor="Green"
+                BorderColor="Black"
+                Clicked="btnRegresar_Clicked"
+                CornerRadius="20"
+                FontSize="12"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Regresar"
+                Text="Regresar"
+                VerticalOptions="CenterAndExpand" />
+        </Frame>
+
+    </Grid>
+</ContentPage>

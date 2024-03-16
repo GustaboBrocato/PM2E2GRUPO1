@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PM2E2GRUPO1.Views.editarSitio"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title=""
+    BackgroundImageSource="backgroundfirma.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Frame
+            Grid.Row="0"
+            Margin="10,10,10,10"
+            Padding="5,10,5,10"
+            BackgroundColor="{DynamicResource LightBlue70}"
+            BorderColor="Black"
+            CornerRadius="20">
+            <Label
+                Margin="0,0,0,0"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalTextAlignment="Center"
+                Text="Editar Sitio"
+                TextColor="Black"
+                VerticalOptions="Start" />
+        </Frame>
+
+        <ActivityIndicator
+            x:Name="activityIndicator"
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsLoading}"
+            IsVisible="{Binding IsLoading}"
+            VerticalOptions="Center"
+            Color="Green" />
+
+        <ScrollView Grid.Row="1">
+            <Frame
+                x:Name="framePrincipal"
+                Margin="10,10,10,10"
+                Padding="5,10,5,10"
+                BackgroundColor="{DynamicResource LightBlue70}"
+                BorderColor="Black"
+                CornerRadius="20">
+                <StackLayout Orientation="Vertical">
+                    <Frame
+                        Margin="0,0,0,10"
+                        Padding="0,0,0,0"
+                        BackgroundColor="Transparent"
+                        CornerRadius="20"
+                        HeightRequest="300">
+                        <toolkit:MediaElement
+                            x:Name="mediaElementVideo"
+                            Margin="0,0,0,0"
+                            Aspect="AspectFit"
+                            BackgroundColor="White"
+                            HeightRequest="300"
+                            Source=""
+                            WidthRequest="300" />
+                    </Frame>
+
+                    <StackLayout
+                        Margin="0,10,0,0"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <StackLayout Margin="0,0,30,0" Orientation="Vertical">
+                            <Label
+                                Margin="0,0,0,5"
+                                FontSize="16"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="Latitud"
+                                TextColor="Black"
+                                VerticalOptions="Start"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                x:Name="labelLatitude"
+                                Margin="0,0,0,10"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="00.00"
+                                TextColor="Gray"
+                                VerticalOptions="Start"
+                                VerticalTextAlignment="Center" />
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical">
+                            <Label
+                                Margin="0,0,0,5"
+                                FontSize="16"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="Longitud"
+                                TextColor="Black"
+                                VerticalOptions="Start"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                x:Name="labelLongitude"
+                                Margin="0,0,0,10"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="00.00"
+                                TextColor="Gray"
+                                VerticalOptions="Start"
+                                VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </StackLayout>
+                    <Label
+                        Margin="0,10,0,5"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalTextAlignment="Center"
+                        Text="Título"
+                        TextColor="Black"
+                        VerticalOptions="Start" />
+                    <Frame
+                        Margin="5,0,5,5"
+                        Padding="0,0,0,0"
+                        BackgroundColor="White"
+                        CornerRadius="10">
+                        <Entry
+                            x:Name="entryDescripcion"
+                            Margin="5,0,5,0"
+                            BackgroundColor="Transparent"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Placeholder="Ingrese un título para el lugar"
+                            PlaceholderColor="Gray"
+                            TextColor="Black" />
+                    </Frame>
+
+
+
+                    <Label
+                        Margin="0,10,0,5"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalTextAlignment="Center"
+                        Text="Descripción de la Ubicación (voz)"
+                        TextColor="Black"
+                        VerticalOptions="Start" />
+                    <StackLayout Orientation="Horizontal">
+                        <ImageButton
+                            x:Name="btnGrabarAudio"
+                            Grid.Column="2"
+                            Margin="0,0,0,10"
+                            Aspect="AspectFit"
+                            BackgroundColor="Transparent"
+                            HeightRequest="60"
+                            Pressed="btnGrabarAudio_Pressed"
+                            Released="btnGrabarAudio_Released"
+                            Source="grabar.png"
+                            WidthRequest="60" />
+                        <Frame
+                            Margin="0,0,0,10"
+                            Padding="0,0,0,0"
+                            BackgroundColor="Transparent"
+                            CornerRadius="20"
+                            HeightRequest="40">
+                            <toolkit:MediaElement
+                                x:Name="mediaElementAudio"
+                                Margin="0,0,0,0"
+                                Aspect="AspectFit"
+                                BackgroundColor="Transparent"
+                                HeightRequest="40"
+                                Source=""
+                                WidthRequest="300" />
+                        </Frame>
+
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+        <Frame
+            Grid.Row="2"
+            Margin="10,10,10,10"
+            Padding="5,10,5,10"
+            BackgroundColor="{DynamicResource LightBlue70}"
+            BorderColor="Black"
+            CornerRadius="20">
+            <Button
+                x:Name="btnAgregar"
+                Margin="0,0,0,0"
+                BackgroundColor="Green"
+                BorderColor="Black"
+                Clicked="btnAgregar_Clicked"
+                CornerRadius="20"
+                FontSize="12"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Agregar"
+                Text="Actualizar Sitio"
+                VerticalOptions="CenterAndExpand" />
+        </Frame>
+    </Grid>
+</ContentPage>
