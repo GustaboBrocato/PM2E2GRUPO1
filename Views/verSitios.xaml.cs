@@ -49,7 +49,7 @@ public partial class verSitios : ContentPage
                     AudioFile = item.audioFile,
                     Lugar = descripcion,
                     VerMediaTappedCommand = new Command(() => HandleVerMediaTapped(item, descripcion)),
-                    VerMapaTappedCommand = new Command(() => HandleVerMapaTapped(item)),
+                    VerMapaTappedCommand = new Command(() => HandleVerMapaTapped(item, descripcion)),
                     EditarTappedCommand = new Command(() => HandleEditarTapped(item)),
                     EliminarTappedCommand = new Command(() => HandleEliminarTapped(item))
                 };
@@ -75,9 +75,9 @@ public partial class verSitios : ContentPage
 
         await Navigation.PushModalAsync(new NavigationPage(verMedia));
     }
-    private async void HandleVerMapaTapped(sitioModel item)
+    private async void HandleVerMapaTapped(sitioModel item, string lugar)
     {
-        await DisplayAlert("Alerta", $"Aqui, {item.id}", "OK");
+        await Navigation.PushAsync(new Views.verMapa(item, lugar));
     }
 
     private async void HandleEditarTapped(sitioModel item)
