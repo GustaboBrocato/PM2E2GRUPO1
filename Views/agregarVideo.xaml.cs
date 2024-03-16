@@ -4,6 +4,7 @@ using PM2E2GRUPO1.Controllers;
 using PM2E2GRUPO1.Extensions;
 using PM2E2GRUPO1.Config;
 using Microsoft.Maui.Controls;
+using System.Net.NetworkInformation;
 
 namespace PM2E2GRUPO1.Views;
 
@@ -35,54 +36,92 @@ public partial class agregarVideo : ContentPage
 
     private async void InitializePage()
     {
-        try
-        {
-            // Revisa si el permiso de ubicacion ha sido concedido
-            var locationPermissionStatus = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+        bool isInternet = await IsInternetAvailable();
 
-            if (locationPermissionStatus == PermissionStatus.Granted)
-            {
-                // Obtiene la ubicacion
-                var location = await Geolocation.GetLocationAsync(new GeolocationRequest
-                {
-                    DesiredAccuracy = GeolocationAccuracy.Default,
-                    Timeout = TimeSpan.FromSeconds(10)
-                });
-
-                if (location != null)
-                {
-                    Latitude = location.Latitude;
-                    Longitude = location.Longitude;
-                    // Coloca la latitude y longitud en los labels
-                    labelLatitude.Text = $"{location.Latitude}";
-                    labelLongitude.Text = $"{location.Longitude}";
-                }
-                else if (labelLatitude.Text.Equals("00.00") || labelLongitude.Text.Equals("00.00"))
-                {
-                    // Cuando la ubicacion es nula
-                    await DisplayAlert("Alerta", "El GPS se encuentra desactivado. Porfavor active su GPS y abra la aplicación de nuevo!", "Ok");
-                }
-            }
-            else
-            {
-                // Cuando el permiso no es otorgado
-                await DisplayAlert("Error", "Permiso de Ubicación no otorgado. El Permiso es necesario para utilizar la aplicacion.", "OK");
-                Application.Current.Quit();
-            }
-        }
-        catch (FeatureNotEnabledException)
+        if (isInternet)
         {
             try
             {
-                await Application.Current.MainPage.DisplayAlert("Alerta", "El GPS se encuentra desactivado. Porfavor active su GPS y abra la aplicación de nuevo!", "Ok");
-                Application.Current.Quit();
+                // Revisa si el permiso de ubicacion ha sido concedido
+                var locationPermissionStatus = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
 
+                if (locationPermissionStatus == PermissionStatus.Granted)
+                {
+                    // Obtiene la ubicacion
+                    var location = await Geolocation.GetLocationAsync(new GeolocationRequest
+                    {
+                        DesiredAccuracy = GeolocationAccuracy.Default,
+                        Timeout = TimeSpan.FromSeconds(10)
+                    });
+
+                    if (location != null)
+                    {
+                        Latitude = location.Latitude;
+                        Longitude = location.Longitude;
+                        // Coloca la latitude y longitud en los labels
+                        labelLatitude.Text = $"{location.Latitude}";
+                        labelLongitude.Text = $"{location.Longitude}";
+                    }
+                    else if (labelLatitude.Text.Equals("00.00") || labelLongitude.Text.Equals("00.00"))
+                    {
+                        // Cuando la ubicacion es nula
+                        await DisplayAlert("Alerta", "El GPS se encuentra desactivado. Porfavor active su GPS y abra la aplicación de nuevo!", "Ok");
+                    }
+                }
+                else
+                {
+                    // Cuando el permiso no es otorgado
+                    await DisplayAlert("Error", "Permiso de Ubicación no otorgado. El Permiso es necesario para utilizar la aplicacion.", "OK");
+                    Application.Current.Quit();
+                }
             }
-            catch (Exception ex)
+            catch (FeatureNotEnabledException)
             {
-                Console.WriteLine($"Error in DisplayGpsNotEnabledAlert: {ex.Message}");
-            }
+                try
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "El GPS se encuentra desactivado. Porfavor active su GPS y abra la aplicación de nuevo!", "Ok");
+                    Application.Current.Quit();
 
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error in DisplayGpsNotEnabledAlert: {ex.Message}");
+                }
+
+            }
+        }
+        else
+        {
+            await DisplayAlert("Alerta", "Su Dispositivo no tiene acceso a internet!", "Ok");
+            await Navigation.PopAsync();
+            return;
+        }
+        
+    }
+
+    public async Task<bool> IsInternetAvailable()
+    {
+        var current = Connectivity.NetworkAccess;
+
+        if (current == NetworkAccess.Internet)
+        {
+            // Connection to internet is available, perform ping test
+            try
+            {
+                var ping = new Ping();
+                var response = await ping.SendPingAsync("www.google.com", 1000); // Ping Google's server
+                return response.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+                // Ping failed
+                return false;
+            }
+        }
+        else
+        {
+            // No network available
+            return false;
         }
     }
 

@@ -108,7 +108,7 @@ public partial class verSitios : ContentPage
 
     private void btnRegresar_Clicked(object sender, EventArgs e)
     {
-        Navigation.PopAsync();
+        Navigation.PushAsync(new MainPage());
     }
 
     protected override void OnDisappearing()
